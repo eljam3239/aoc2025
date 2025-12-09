@@ -21,17 +21,35 @@ int main() {
     std::string strInput;
     while (std::getline(inf, strInput)) {
         // std::cout << stoi(strInput.substr(1)) << std::endl;
+	int distance = stoi(strInput.substr(1));
         if (strInput[0] == 'R') {
-            position = moveRight(position, stoi(strInput.substr(1)), 100);
-            if (position == 0) {
-                counter++;
-            }
+	    for (int i = 1; i<=distance; i++) {
+	        position = (position+1)%100;
+		if (position == 0) {
+    		    counter++;
+		}
+	    }
+            //position = moveRight(position, stoi(strInput.substr(1)), 100);
+	}    
+        if (strInput[0] == 'L') {
+	    for (int i = 1;i<=distance;i++) {
+	        position = (position-1+100)%100;
+	        if (position == 0) {
+		    counter++;
+		}
+	    }
+	}
+	/**	
         } else if (strInput[0] == 'L') {
-            position = moveLeft(position, stoi(strInput.substr(1)), 100);
+	    counter += std::truncf(((position+stoi(strInput.substr(1)))/100));		
+	    position = moveLeft(position, stoi(strInput.substr(1)), 100);
+            
+
             if (position == 0) {
                 counter++;
             }
         }
+	*/
     }
     std::cout << counter << std::endl;
 
